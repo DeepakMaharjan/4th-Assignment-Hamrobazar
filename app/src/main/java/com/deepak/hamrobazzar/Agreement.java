@@ -33,5 +33,15 @@ public class Agreement extends AppCompatActivity {
             }
         });
 
+        chkSafety.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Agreement.this, Safety.class);
+                startActivity(intent);
+                chkSafety.setChecked(true);
+                chkSafety.setEnabled(false);
+            }
+        });
+
     }
 }
