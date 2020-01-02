@@ -52,15 +52,18 @@
         android:padding="20dp">
 
         <CheckBox
+            android:id="@+id/chkTerms"
             android:text="Click to view Terms of Use"
             style="@style/agreementCheckBox"/>
 
         <CheckBox
+            android:id="@+id/chkSafety"
             android:text="Click to view Safety Tips"
             style="@style/agreementCheckBox"
             />
 
         <CheckBox
+            android:id="@+id/chkAd"
             android:text="Click to view Ad Posting Rule"
             style="@style/agreementCheckBox"
             />
