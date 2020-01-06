@@ -11,18 +11,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashActivity">
+        <activity android:name=".Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AdPostingRule" />
-        <activity android:name=".Safety" />
-        <activity android:name=".Terms" />
-        <activity android:name=".Agreement"></activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".SplashActivity" />
+        <activity android:name=".agreement.AdPostingRule" />
+        <activity android:name=".agreement.Safety" />
+        <activity android:name=".agreement.Terms" />
+        <activity android:name=".Agreement" />
+        <activity android:name=".MainActivity">
+
+        </activity>
     </application>
 
 </manifest>
