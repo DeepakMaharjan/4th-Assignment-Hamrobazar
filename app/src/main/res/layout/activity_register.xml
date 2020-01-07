@@ -12,6 +12,17 @@
         android:orientation="vertical"
         android:padding="20dp">
 
+        <ImageView
+            android:id="@+id/imgProfile"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_gravity="center"
+            android:src="@drawable/profile_icon"
+
+            />
+
         <TextView
             style="@style/textviewRegister"
             android:text="Email address:" />
