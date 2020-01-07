@@ -13,7 +13,9 @@ import android.widget.LinearLayout;
 
 import com.deepak.hamrobazzar.adapters.CategoryAdapter;
 import com.deepak.hamrobazzar.adapters.ImageSliderAdapter;
+import com.deepak.hamrobazzar.adapters.ProductAdapter;
 import com.deepak.hamrobazzar.model.Category;
+import com.deepak.hamrobazzar.model.Products;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +23,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     //Category Recycler View
-    RecyclerView rvCategory;
+    RecyclerView rvCategory, rvTrendingProducts;
 
     ViewPager viewPager;
 
@@ -107,6 +109,27 @@ public class MainActivity extends AppCompatActivity {
         CategoryAdapter categoryAdapter = new CategoryAdapter(categoryList,this);
         rvCategory.setAdapter(categoryAdapter);
         rvCategory.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+
+        //------------Ending Category Recycler View------------//
+
+
+
+        //------------Trending Product Recycler View------------//
+        rvTrendingProducts = findViewById(R.id.rvTrendingProducts);
+
+        //Create a list of category
+        List<Products> productsList = new ArrayList<>();
+
+        productsList.add(new Products("Iphone 6s 16gb", R.drawable.iphone, "Rs.10,000", "(Used)"));
+        productsList.add(new Products("21 gear black Mountain Bike", R.drawable.mountain_bike, "Rs.10,000", "(Used)"));
+        productsList.add(new Products("Iphone 6s 16gb", R.drawable.iphone, "Rs.10,000", "(Used)"));
+        productsList.add(new Products("21 gear black Mountain Bike", R.drawable.mountain_bike, "Rs.10,000", "(Used)"));productsList.add(new Products("Iphone 6s 16gb", R.drawable.iphone, "Rs.10,000", "(Used)"));
+        productsList.add(new Products("21 gear black Mountain Bike", R.drawable.mountain_bike, "Rs.10,000", "(Used)"));
+
+
+        ProductAdapter productAdapter= new ProductAdapter(productsList,this);
+        rvTrendingProducts.setAdapter(productAdapter);
+        rvTrendingProducts.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
         //------------Ending Category Recycler View------------//
 

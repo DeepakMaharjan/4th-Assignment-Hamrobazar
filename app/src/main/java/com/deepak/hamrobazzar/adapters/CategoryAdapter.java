@@ -20,6 +20,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     List<Category> categoryList;
     Context context;
 
+
     public CategoryAdapter(List<Category> categoryList, Context context) {
         this.categoryList = categoryList;
         this.context = context;
@@ -39,6 +40,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
         holder.imgCatIcon.setImageResource(category.getIcons());
         holder.tvCategory.setText(category.getCategory());
+
+        holder.
 
     }
 
