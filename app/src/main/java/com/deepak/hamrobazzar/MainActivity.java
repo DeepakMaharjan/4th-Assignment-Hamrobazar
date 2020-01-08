@@ -6,11 +6,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toolbar;
 
 import com.deepak.hamrobazzar.adapters.CategoryAdapter;
 import com.deepak.hamrobazzar.adapters.ImageSliderAdapter;
@@ -22,6 +24,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+    Toolbar mainToolbar;
+
+    ImageView imgLoginIcon;
 
     //Category Recycler View
     RecyclerView rvCategory, rvTrendingProducts, rvRecentlyListedAds;
@@ -38,6 +44,20 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        imgLoginIcon = findViewById(R.id.imgLoginIcon);
+        imgLoginIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Login.class);
+                startActivity(intent);
+            }
+        });
+
+
+
+
 
 
         viewPager = findViewById(R.id.imageSlider);
@@ -149,6 +169,7 @@ public class MainActivity extends AppCompatActivity {
         recentProductsList.add(new Products("21 gear black Mountain Bike", R.drawable.mountain_bike, "Rs.10,000", "(Used)"));productsList.add(new Products("Iphone 6s 16gb", R.drawable.iphone, "Rs.10,000", "(Used)"));
         recentProductsList.add(new Products("Iphone 6s 16gb", R.drawable.iphone, "Rs.10,000", "(Used)"));
         recentProductsList.add(new Products("21 gear black Mountain Bike", R.drawable.mountain_bike, "Rs.10,000", "(Used)"));
+        recentProductsList.add(new Products("Iphone 6s 16gb", R.drawable.iphone, "Rs.10,000", "(Used)"));
 
 
         ProductAdapter recentProductAdapter= new ProductAdapter(recentProductsList,this);
