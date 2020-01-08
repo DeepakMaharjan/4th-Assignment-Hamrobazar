@@ -41,7 +41,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         holder.imgCatIcon.setImageResource(category.getIcons());
         holder.tvCategory.setText(category.getCategory());
 
-        holder.
 
     }
 

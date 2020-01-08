@@ -6,6 +6,8 @@
     android:background="#fff"
     android:layout_marginLeft="5dp"
     android:layout_marginRight="5dp"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
     android:gravity="center">
 
     <TextView
@@ -13,6 +15,8 @@
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:text="Iphone 6s 16 gb"
+        android:textColor="#000"
+        android:textSize="14sp"
         android:textStyle="bold"
         android:maxLines="2"
         android:paddingLeft="5dp"
@@ -33,6 +37,7 @@
         android:id="@+id/tvPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="#000"
         android:text="Rs.20,000"
         />
 
@@ -40,6 +45,7 @@
         android:id="@+id/tvUserOrNot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="#000"
         android:text="(Used)"
         />
 
