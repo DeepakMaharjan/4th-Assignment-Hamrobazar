@@ -48,6 +48,7 @@
 
             <EditText
                 android:id="@+id/etLoginPassword"
+                android:inputType="textPassword"
                 style="@style/loginEdit"
                 android:hint="Enter Password" />
 

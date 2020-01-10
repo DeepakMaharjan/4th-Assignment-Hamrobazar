@@ -33,7 +33,6 @@ import retrofit2.Retrofit;
 
 public class MainActivity extends AppCompatActivity {
 
-    Toolbar mainToolbar;
 
     ImageView imgLoginIcon;
 
@@ -145,8 +144,8 @@ public class MainActivity extends AppCompatActivity {
         //------------Ending Category Recycler View------------//
 
 
-        //------------Recently Listed Ads Product Recycler View------------//
-        rvRecentlyListedAds = findViewById(R.id.rvRecentlyListedAds);
+//        //------------Recently Listed Ads Product Recycler View------------//
+//        rvRecentlyListedAds = findViewById(R.id.rvRecentlyListedAds);
 
 //        //Create a list of category
 //        List<Products> recentProductsList = new ArrayList<>();

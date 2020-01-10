@@ -54,7 +54,7 @@ public class Login extends AppCompatActivity {
         StrictModeClass.StrictMode();
 
         if (loginBLL.checkUser(email, password)) {
-            Intent intent = new Intent(Login.this, MainActivity.class);
+            Intent intent = new Intent(Login.this, LoggedIn.class);
             startActivity(intent);
             Toast.makeText(this, "Logged in successfully.", Toast.LENGTH_SHORT).show();
             finish();
