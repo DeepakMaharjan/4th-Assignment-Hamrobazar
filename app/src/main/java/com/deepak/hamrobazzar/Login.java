@@ -23,6 +23,9 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        etLoginEmail = findViewById(R.id.etLoginEmail);
+        etLoginPassword = findViewById(R.id.etLoginPassword);
+
         btnRegister = findViewById(R.id.btnRegister);
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
@@ -53,6 +56,7 @@ public class Login extends AppCompatActivity {
         if (loginBLL.checkUser(email, password)) {
             Intent intent = new Intent(Login.this, MainActivity.class);
             startActivity(intent);
+            Toast.makeText(this, "Logged in successfully.", Toast.LENGTH_SHORT).show();
             finish();
         } else {
             Toast.makeText(this, "Either email or password is incorrect", Toast.LENGTH_SHORT).show();

@@ -1,5 +1,7 @@
 package com.deepak.hamrobazzar.bll;
 
+import android.widget.Toast;
+
 import com.deepak.hamrobazzar.api.UsersAPI;
 import com.deepak.hamrobazzar.serverresponse.SignUpResponse;
 import com.deepak.hamrobazzar.url.Url;

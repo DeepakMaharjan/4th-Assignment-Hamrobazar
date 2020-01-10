@@ -12,22 +12,31 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.deepak.hamrobazzar.adapters.CategoryAdapter;
 import com.deepak.hamrobazzar.adapters.ImageSliderAdapter;
 import com.deepak.hamrobazzar.adapters.ProductAdapter;
+import com.deepak.hamrobazzar.api.ProductAPI;
 import com.deepak.hamrobazzar.model.Category;
 import com.deepak.hamrobazzar.model.Products;
+import com.deepak.hamrobazzar.url.Url;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class MainActivity extends AppCompatActivity {
 
     Toolbar mainToolbar;
 
     ImageView imgLoginIcon;
+
 
     //Category Recycler View
     RecyclerView rvCategory, rvTrendingProducts, rvRecentlyListedAds;
@@ -37,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
     LinearLayout sliderDotsPanel;
     private int dotscount;
     private ImageView[] dots;
-    
 
 
     @Override
@@ -56,10 +64,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
-
-
-
         viewPager = findViewById(R.id.imageSlider);
 
         //For Indicators
@@ -70,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
 
 
-
         //Indicator
         dotscount = adapter.getCount();
         dots = new ImageView[dotscount];
@@ -78,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < dotscount; i++) {
 
             dots[i] = new ImageView(this);
-            dots[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.default_indicator    ));
+            dots[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.default_indicator));
 
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
@@ -118,66 +121,79 @@ public class MainActivity extends AppCompatActivity {
         List<Category> categoryList = new ArrayList<>();
 
         categoryList.add(new Category(R.drawable.post_free_ad, "Post FREE Ad"));
-        categoryList.add(new Category(R.drawable.mobile_handset,"Mobile Handset"));
-        categoryList.add(new Category(R.drawable.laptop,"Laptops / Notebooks"));
-        categoryList.add(new Category(R.drawable.houses_for_sale,"Rental Houses"));
-        categoryList.add(new Category(R.drawable.furnitures_for_home,"Furnitures for Home"));
+        categoryList.add(new Category(R.drawable.mobile_handset, "Mobile Handset"));
+        categoryList.add(new Category(R.drawable.laptop, "Laptops / Notebooks"));
+        categoryList.add(new Category(R.drawable.houses_for_sale, "Rental Houses"));
+        categoryList.add(new Category(R.drawable.furnitures_for_home, "Furnitures for Home"));
         categoryList.add(new Category(R.drawable.rental_houses, "Houses for Sale"));
         categoryList.add(new Category(R.drawable.see_more_categories, "See More Categories"));
 
 
-
-        CategoryAdapter categoryAdapter = new CategoryAdapter(categoryList,this);
+        CategoryAdapter categoryAdapter = new CategoryAdapter(categoryList, this);
         rvCategory.setAdapter(categoryAdapter);
         rvCategory.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
         //------------Ending Category Recycler View------------//
 
 
-
         //------------Trending Product Recycler View------------//
         rvTrendingProducts = findViewById(R.id.rvTrendingProducts);
 
         //Create a list of category
-        List<Products> productsList = new ArrayList<>();
-
-        productsList.add(new Products("Iphone 6s 16gb", R.drawable.iphone, "Rs.10,000", "(Used)"));
-        productsList.add(new Products("21 gear black Mountain Bike", R.drawable.mountain_bike, "Rs.10,000", "(Used)"));
-        productsList.add(new Products("Iphone 6s 16gb", R.drawable.iphone, "Rs.10,000", "(Used)"));
-        productsList.add(new Products("21 gear black Mountain Bike", R.drawable.mountain_bike, "Rs.10,000", "(Used)"));productsList.add(new Products("Iphone 6s 16gb", R.drawable.iphone, "Rs.10,000", "(Used)"));
-        productsList.add(new Products("21 gear black Mountain Bike", R.drawable.mountain_bike, "Rs.10,000", "(Used)"));
-
-
-        ProductAdapter productAdapter= new ProductAdapter(productsList,this);
-        rvTrendingProducts.setAdapter(productAdapter);
-        rvTrendingProducts.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        showAllProducts();
 
         //------------Ending Category Recycler View------------//
-
-
-
 
 
         //------------Recently Listed Ads Product Recycler View------------//
         rvRecentlyListedAds = findViewById(R.id.rvRecentlyListedAds);
 
-        //Create a list of category
-        List<Products> recentProductsList = new ArrayList<>();
-
-        recentProductsList.add(new Products("21 gear black Mountain Bike", R.drawable.mountain_bike, "Rs.10,000", "(Used)"));
-        recentProductsList.add(new Products("Iphone 6s 16gb", R.drawable.iphone, "Rs.10,000", "(Used)"));
-        recentProductsList.add(new Products("21 gear black Mountain Bike", R.drawable.mountain_bike, "Rs.10,000", "(Used)"));productsList.add(new Products("Iphone 6s 16gb", R.drawable.iphone, "Rs.10,000", "(Used)"));
-        recentProductsList.add(new Products("Iphone 6s 16gb", R.drawable.iphone, "Rs.10,000", "(Used)"));
-        recentProductsList.add(new Products("21 gear black Mountain Bike", R.drawable.mountain_bike, "Rs.10,000", "(Used)"));
-        recentProductsList.add(new Products("Iphone 6s 16gb", R.drawable.iphone, "Rs.10,000", "(Used)"));
-
-
-        ProductAdapter recentProductAdapter= new ProductAdapter(recentProductsList,this);
-        rvRecentlyListedAds.setAdapter(recentProductAdapter);
-        rvRecentlyListedAds.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+//        //Create a list of category
+//        List<Products> recentProductsList = new ArrayList<>();
+//
+//        recentProductsList.add(new Products("21 gear black Mountain Bike", R.drawable.mountain_bike, "Rs.10,000", "(Used)"));
+//        recentProductsList.add(new Products("Iphone 6s 16gb", R.drawable.iphone, "Rs.10,000", "(Used)"));
+//        recentProductsList.add(new Products("21 gear black Mountain Bike", R.drawable.mountain_bike, "Rs.10,000", "(Used)"));
+//        recentProductsList.add(new Products("Iphone 6s 16gb", R.drawable.iphone, "Rs.10,000", "(Used)"));
+//        recentProductsList.add(new Products("Iphone 6s 16gb", R.drawable.iphone, "Rs.10,000", "(Used)"));
+//        recentProductsList.add(new Products("21 gear black Mountain Bike", R.drawable.mountain_bike, "Rs.10,000", "(Used)"));
+//        recentProductsList.add(new Products("Iphone 6s 16gb", R.drawable.iphone, "Rs.10,000", "(Used)"));
+//
+//
+//        ProductAdapter recentProductAdapter = new ProductAdapter(recentProductsList, this);
+//        rvRecentlyListedAds.setAdapter(recentProductAdapter);
+//        rvRecentlyListedAds.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
         //------------Ending Category Recycler View------------//
 
+
+    }
+
+    private void showAllProducts() {
+
+        ProductAPI productAPI = Url.getInstance().create((ProductAPI.class));
+
+        Call<List<Products>> proListCall = productAPI.getAllProducts();
+
+        proListCall.enqueue(new Callback<List<Products>>() {
+            @Override
+            public void onResponse(Call<List<Products>> call, Response<List<Products>> response) {
+                if (!response.isSuccessful()) {
+                    Toast.makeText(MainActivity.this, "Error code " + response.code(), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                List<Products> productsList = response.body();
+                ProductAdapter productAdapter = new ProductAdapter(productsList, MainActivity.this);
+                rvTrendingProducts.setAdapter(productAdapter);
+                rvTrendingProducts.setLayoutManager(new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false));
+            }
+
+            @Override
+            public void onFailure(Call<List<Products>> call, Throwable t) {
+
+            }
+        });
 
     }
 
@@ -191,12 +207,11 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void run() {
 
-            if (!pagerMoved){
-                if (viewPager.getCurrentItem() == viewPager.getChildCount()){
-                    viewPager.setCurrentItem(0,true);
-                }
-                else {
-                    viewPager.setCurrentItem(viewPager.getCurrentItem()+1, true);
+            if (!pagerMoved) {
+                if (viewPager.getCurrentItem() == viewPager.getChildCount()) {
+                    viewPager.setCurrentItem(0, true);
+                } else {
+                    viewPager.setCurrentItem(viewPager.getCurrentItem() + 1, true);
                 }
                 pagerMoved = false;
                 h.postDelayed(animateViewPager, ANIM_VIEWPAGER_DELAY);
@@ -208,7 +223,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
 
-        if (h != null){
+        if (h != null) {
             h.removeCallbacks(animateViewPager);
         }
     }
@@ -217,6 +232,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        h.postDelayed(animateViewPager,ANIM_VIEWPAGER_DELAY);
+        h.postDelayed(animateViewPager, ANIM_VIEWPAGER_DELAY);
     }
+
 }
