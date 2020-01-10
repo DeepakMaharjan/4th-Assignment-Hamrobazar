@@ -100,7 +100,7 @@
             android:text="Address 2 (Area Location):" />
 
         <EditText
-            android:id="@+id/etReAddressOne"
+            android:id="@+id/etReAddressTwo"
             style="@style/editTextRegister"
             android:drawableEnd="@drawable/important" />
 
@@ -109,7 +109,7 @@
             android:text="Address 3 (City Name):" />
 
         <Spinner
-            android:id="@+id/spinCity"
+            android:id="@+id/spinCityThree"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:spinnerMode="dialog" />
@@ -120,12 +120,14 @@
             android:text="Subscribe / Hide Phone:" />
 
         <CheckBox
+            android:id="@+id/chkSubscribe"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="I do not want to subscribe to site newsletter."
             android:textColor="#000" />
 
         <CheckBox
+            android:id="@+id/chkPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Hide my phone number (only contact me through email)"
@@ -156,6 +158,7 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/btnRegisterFinal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
